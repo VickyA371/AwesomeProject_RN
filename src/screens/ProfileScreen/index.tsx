@@ -1,14 +1,53 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-// ** Types
-import {RootNavigationType} from '../../navigation/types';
+// ** Components
+import ProfileOption from '../../components/ProfileOption';
 
-const ProfileScreen = (_props: NativeStackScreenProps<RootNavigationType>) => {
+// ** Types
+import {AppContentEnumType, RootNavigationType} from '../../navigation/types';
+import colors from '../../constants/colors';
+
+const ProfileScreen = (props: NativeStackScreenProps<RootNavigationType>) => {
   return (
     <View style={styles.container}>
-      <Text>{'Profile Screen'}</Text>
+      <ProfileOption
+        text="Bottom Tab Example"
+        onPress={() => {
+          props.navigation.navigate('bottomTab');
+        }}
+      />
+      <ProfileOption
+        text="Code Split"
+        onPress={() => {
+          props.navigation.navigate('codeSplit');
+        }}
+      />
+      <ProfileOption
+        text="Privacy Policy"
+        onPress={() => {
+          props.navigation.navigate('appContent', {
+            contentType: AppContentEnumType.PrivacyPolicy,
+          });
+        }}
+      />
+      <ProfileOption
+        text="Contact Us"
+        onPress={() => {
+          props.navigation.navigate('appContent', {
+            contentType: AppContentEnumType.ContactUs,
+          });
+        }}
+      />
+      <ProfileOption
+        text="About Us"
+        onPress={() => {
+          props.navigation.navigate('appContent', {
+            contentType: AppContentEnumType.AboutUs,
+          });
+        }}
+      />
     </View>
   );
 };
@@ -16,8 +55,9 @@ const ProfileScreen = (_props: NativeStackScreenProps<RootNavigationType>) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 15,
+    backgroundColor: colors.white,
+    paddingTop: 15,
   },
 });
 
